@@ -1,6 +1,6 @@
-from usmcdatabase.utilities.min_max_scores import *
-from usmcdatabase.utilities.score_class import *
-from usmcdatabase.utilities.time_age import *
+from .utilities.min_max_scores import *
+from .utilities.score_class import *
+from .utilities.time_age import *
 
 # Create your views here.
 def get_pft_score(request_body):

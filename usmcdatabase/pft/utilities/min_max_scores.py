@@ -1,5 +1,4 @@
-from usmcdatabase.cft.models import *
-from usmcdatabase.pft.models import *
+from pft.models import *
 
 def faster_than_max_time(age, gender, time, high_alt, event):
     max_score = event.query.filter((event.age == age)
