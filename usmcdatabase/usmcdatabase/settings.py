@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'pft',
     'users',
     'nco',
+    'authentication',
 ]
 
 MIDDLEWARE = [
