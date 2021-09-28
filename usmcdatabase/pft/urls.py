@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('/all', views.get_pft_score),
-    path('/all', views.get_age_range),
+    path('all', views.get_pft_score),
+    path('all', views.get_age_range),
     path('three_mile/', views.get_pft_run),
     path('row/', views.get_pft_row),
     path('pullups/', views.get_pft_pullups),
