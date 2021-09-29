@@ -1,8 +1,13 @@
 from .utilities.min_max_scores import *
 from .utilities.score_class import *
 from .utilities.time_age import *
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+
 
 # Create your views here.
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_cft_score(request_body):
     gender = request_body.get("gender")
     mtc = request_body.get("mtc")
@@ -30,6 +35,8 @@ def get_cft_score(request_body):
     scores["total"] = get_total_cft_score_and_class(scores)
     return scores
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_cft_mtc(age, gender, time, high_alt):
     if(faster_than_max_time(age, gender, time, high_alt, Movement_Contact)):
         return 100
@@ -41,6 +48,8 @@ def get_cft_mtc(age, gender, time, high_alt):
                                         & (Movement_Contact.high_alt == high_alt)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_cft_muf(age, gender, time, high_alt):
     if(faster_than_max_time(age, gender, time, high_alt, Maneuver_Fire)):
         return 100
@@ -52,6 +61,8 @@ def get_cft_muf(age, gender, time, high_alt):
                                         & (Maneuver_Fire.high_alt == high_alt)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_cft_ammo(age, gender, reps):
     if(above_max_reps(age, gender, reps, Ammo_Lift)):
         return 100
