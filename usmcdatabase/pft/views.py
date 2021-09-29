@@ -3,6 +3,7 @@ from .utilities.data_access import get_pft_score
 from django.http import JsonResponse
 from rest_framework.permissions import AllowAny
 
+error_message = {"error": "Unable to process your score data. Please verify your inputs and try again. If the error persists please contact "}
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
