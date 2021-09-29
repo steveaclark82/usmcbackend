@@ -1,8 +1,14 @@
 from .utilities.min_max_scores import *
 from .utilities.score_class import *
 from .utilities.time_age import *
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+
+
 
 # Create your views here.
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_score(request_body):
     gender = request_body.get("gender")
     run = request_body.get("run")
@@ -54,6 +60,8 @@ def get_pft_score(request_body):
     scores["total"] = get_total_pft_score_and_class(scores)
     return scores
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_run(age, gender, time, high_alt):
     if(faster_than_max_time(age, gender, time, high_alt, Three_Mile)):
         return 100
@@ -65,6 +73,8 @@ def get_pft_run(age, gender, time, high_alt):
                                     & (Three_Mile.high_alt == high_alt)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_row(age, gender, time, high_alt):
     if(faster_than_max_time(age, gender, time, high_alt, Row)):
         return 100
@@ -76,6 +86,8 @@ def get_pft_row(age, gender, time, high_alt):
                              & (Row.high_alt == high_alt)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_pullups(age, gender, reps):
     if(above_max_reps(age, gender, reps, Pullups)):
         return 100
@@ -86,6 +98,8 @@ def get_pft_pullups(age, gender, reps):
                                  & (Pullups.reps == reps)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_pushups(age, gender, reps):
     if(above_max_reps(age, gender, reps, Pushups)):
         return 70
@@ -96,6 +110,8 @@ def get_pft_pushups(age, gender, reps):
                                  & (Pushups.reps == reps)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_crunches(age, gender, reps):
     if(above_max_reps(age, gender, reps, Crunches)):
         return 100
@@ -106,6 +122,8 @@ def get_pft_crunches(age, gender, reps):
                                   & (Crunches.reps == reps)).first()
     return event.score
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_pft_plank(age, gender, time):
     if(longer_than_max_plank(age, gender, time)):
         return 100
