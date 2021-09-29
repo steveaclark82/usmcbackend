@@ -8,7 +8,7 @@ error_message = {"error": "Unable to process your score data. Please verify your
 # Create your views here.
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def usmc_pft(request):
+def cft(request):
     request_body = request.get_json()
     score = None
     try:
