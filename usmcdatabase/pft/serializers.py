@@ -3,37 +3,37 @@ from .models import Three_Mile, Row, Crunches, Plank, Pullups, Pushups
 
 
 
-class PftSerializer(serializers.ModelSerializer):
+class Three_MileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Three_Mile
         fields = ['id', 'gender', 'age',
                   'time', 'score', 'high_alt']
         
-class PftSerializer(serializers.ModelSerializer):
+class RowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Row
         fields = ['id', 'gender', 'age',
                   'time', 'score', 'high_alt']
         
-class PftSerializer(serializers.ModelSerializer):
+class CrunchesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Crunches
         fields = ['id', 'gender', 'age',
                   'reps', 'score']
         
-class PftSerializer(serializers.ModelSerializer):
+class PlankSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plank
         fields = ['id', 'gender', 'age',
                   'time', 'score']
 
-class PftSerializer(serializers.ModelSerializer):
+class PullupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pullups
         fields = ['id', 'gender', 'age',
                   'reps', 'score']
 
-class PftSerializer(serializers.ModelSerializer):
+class PushupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pushups
         fields = ['id', 'gender', 'age',
