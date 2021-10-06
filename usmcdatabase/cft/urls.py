@@ -1,9 +1,9 @@
-from django.urls import path
+from django.conf.urls import url 
 from . import views
 
 
 urlpatterns = [
-    path('<int:id>/', views.get_Movement_Contact),
-    path('<int:id>/', views.get_Maneuver_Fire),
-    path('<int:id>/', views.get_Ammo_lift),
+    url(r'^api/cft$', views.Maneuver_Fire),
+    url(r'^api/cft$', views.Movement_Contact),
+    url(r'^api/cft$', views.Ammo_Lift),
 ]

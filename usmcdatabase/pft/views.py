@@ -1,18 +1,16 @@
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Three_Mile, Row, Crunches, Plank, Pullups, Pushups
 from .serializers import Three_MileSerializer, RowSerializer, CrunchesSerializer, PlankSerializer, PullupsSerializer, PushupsSerializer
-from django.contrib.auth.models import User
 
 
 
 # Create your views here.
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Three_Mile(request, id):
+def Three_Mile(request, id):
     if request.method == 'POST':
         serializer = Three_MileSerializer(data=request.data)
         if serializer.is_valid():
@@ -27,7 +25,7 @@ def get_Three_Mile(request, id):
 
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Row(request, id):
+def Row(request, id):
     if request.method == 'POST':
         serializer = RowSerializer(data=request.data)
         if serializer.is_valid():
@@ -41,7 +39,7 @@ def get_Row(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Crunches(request, id):
+def Crunches(request, id):
     if request.method == 'POST':
         serializer = CrunchesSerializer(data=request.data)
         if serializer.is_valid():
@@ -55,7 +53,7 @@ def get_Crunches(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Plank(request, id):
+def Plank(request, id):
     if request.method == 'POST':
         serializer = PlankSerializer(data=request.data)
         if serializer.is_valid():
@@ -69,7 +67,7 @@ def get_Plank(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Pullups(request, id):
+def Pullups(request, id):
     if request.method == 'POST':
         serializer = PullupsSerializer(data=request.data)
         if serializer.is_valid():
@@ -83,7 +81,7 @@ def get_Pullups(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def get_Pushups(request, id):
+def Pushups(request, id):
     if request.method == 'POST':
         serializer = PushupsSerializer(data=request.data)
         if serializer.is_valid():

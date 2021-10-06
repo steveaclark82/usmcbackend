@@ -1,33 +1,33 @@
 from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from .models import User
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser 
 
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_all_users(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['POST', 'GET'])
-@permission_classes([IsAuthenticated])
-def get_user(request, id):
-    if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        users = User.objects.filter(id=id)
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-
+@api_view(['POST', 'GET', 'DELETE'])
+def user(request):
+    if request.method == 'GET':
+        user = User.objects.all()
+        
+        username = request.GET.get('username', None)
+        if username is not None:
+            user = user.filter(title__icontains=username)
+        
+        user_serializer = UserSerializer(user, many=True)
+        return JsonResponse(user_serializer.data, safe=False)
+        # 'safe=False' for objects serialization
+ 
+    elif request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return JsonResponse(user_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        count = User.objects.all().delete()
+        return JsonResponse({'message': '{} Users were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 # Create your views here.

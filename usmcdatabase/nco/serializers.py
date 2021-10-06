@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Nco
 
 
-class UserSerializer(serializers.ModelSerializer):
+class NcoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nco
         fields = ['id', 'username', 'password',

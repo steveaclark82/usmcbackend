@@ -1,36 +1,33 @@
 from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from .models import Nco
-from .serializers import UserSerializer
-from django.contrib.auth.models import User
+from .serializers import NcoSerializer
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser 
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_all_nco(request):
-    users = Nco.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['POST', 'GET'])
-@permission_classes([IsAuthenticated])
-def get_nco(request, id):
-    if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        users = Nco.objects.filter(id=id)
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-
-# Create your views here.
-
-
-# Create your views here.
+@api_view(['GET', 'POST', 'DELETE'])
+def nco(request):
+    if request.method == 'GET':
+        nco = Nco.objects.all()
+        
+        username = request.GET.get('username', None)
+        if username is not None:
+            nco = nco.filter(title__icontains=username)
+        
+        nco_serializer = NcoSerializer(nco, many=True)
+        return JsonResponse(nco_serializer.data, safe=False)
+        # 'safe=False' for objects serialization
+ 
+    elif request.method == 'POST':
+        nco_data = JSONParser().parse(request)
+        nco_serializer = NcoSerializer(data=nco_data)
+        if nco_serializer.is_valid():
+            nco_serializer.save()
+            return JsonResponse(nco_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(nco_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        count =Nco.objects.all().delete()
+        return JsonResponse({'message': '{} Nco was deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+ 

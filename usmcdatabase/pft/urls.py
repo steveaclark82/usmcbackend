@@ -1,13 +1,13 @@
-from django.urls import path
+from django.conf.urls import url 
 from . import views
 
 
 urlpatterns = [
-    path('<int:id>/', views.get_Three_Mile),
-    path('<int:id>/', views.get_Crunches),
-    path('<int:id>/', views.get_Plank),
-    path('<int:id>/', views.get_Row),
-    path('<int:id>/', views.get_Pullups),
-    path('<int:id>/', views.get_Pushups),
+    url(r'^api/pft$', views.Three_Mile),
+    url(r'^api/pft$', views.Crunches),
+    url(r'^api/pft$', views.Plank),
+    url(r'^api/pft$', views.Row),
+    url(r'^api/pft$', views.Pullups),
+    url(r'^api/pft$', views.Pushups),
  
 ]

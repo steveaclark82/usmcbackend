@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'cft',
-    'pft',
-    'users',
-    'nco',
-    'authentication',
+    'cft.apps.CftConfig',
+    'pft.apps.PftConfig',
+    'users.apps.UsersConfig',
+    'nco.apps.NcoConfig',
+    'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,4 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # }
 
 CORS_ORIGIN_ALLOW_ALL = True
-
+ALLOWED_HOSTS=['*']
