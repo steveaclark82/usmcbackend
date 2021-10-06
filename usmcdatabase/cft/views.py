@@ -11,12 +11,12 @@ from django.contrib.auth.models import User
 # Create your views here.
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Movement_Contact(request, id):
+def Movement_Contact(request, id=1):
     if request.method == 'POST':
         serializer = Movement_ContactSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(movement_contact=request.movement_contact)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         wod = Movement_Contact.objects.filter(id=id)
@@ -26,12 +26,12 @@ def Movement_Contact(request, id):
 
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Maneuver_Fire(request, id):
+def Maneuver_Fire(request, id=1):
     if request.method == 'POST':
         serializer = Maneuver_FireSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(maneuver_fire=request.maneuver_fire)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Maneuver_Fire.objects.filter(id=id)
@@ -40,12 +40,12 @@ def Maneuver_Fire(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Ammo_Lift(request, id):
+def Ammo_Lift(request, id=1):
     if request.method == 'POST':
         serializer = Ammo_LiftSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(ammo_lift=request.ammo_lift)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Ammo_Lift.objects.filter(id=id)

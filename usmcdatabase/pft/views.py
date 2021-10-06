@@ -10,12 +10,12 @@ from .serializers import Three_MileSerializer, RowSerializer, CrunchesSerializer
 # Create your views here.
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Three_Mile(request, id):
+def Three_Mile(request, id=1):
     if request.method == 'POST':
         serializer = Three_MileSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(three_mile=request.three_mile)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         wod = Three_Mile.objects.filter(id=id)
@@ -25,12 +25,12 @@ def Three_Mile(request, id):
 
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Row(request, id):
+def Row(request, id=1):
     if request.method == 'POST':
         serializer = RowSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(row=request.row)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Row.objects.filter(id=id)
@@ -39,12 +39,12 @@ def Row(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Crunches(request, id):
+def Crunches(request, id=1):
     if request.method == 'POST':
         serializer = CrunchesSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(crunches=request.crunches)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Crunches.objects.filter(id=id)
@@ -53,12 +53,12 @@ def Crunches(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Plank(request, id):
+def Plank(request, id=1):
     if request.method == 'POST':
         serializer = PlankSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(plank=request.plank)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Plank.objects.filter(id=id)
@@ -67,12 +67,12 @@ def Plank(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Pullups(request, id):
+def Pullups(request, id=1):
     if request.method == 'POST':
         serializer = PullupsSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(pullups=request.pullups)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Pullups.objects.filter(id=id)
@@ -81,12 +81,12 @@ def Pullups(request, id):
     
 @api_view(['POST', 'GET'])
 @permission_classes([AllowAny])
-def Pushups(request, id):
+def Pushups(request, id=1):
     if request.method == 'POST':
         serializer = PushupsSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(pushups=request.pushups)
-            return Response(status.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == "GET":
         like = Pushups.objects.filter(id=id)

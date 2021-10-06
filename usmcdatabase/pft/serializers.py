@@ -38,3 +38,4 @@ class PushupsSerializer(serializers.ModelSerializer):
         model = Pushups
         fields = ['id', 'gender', 'age',
                   'reps', 'score']
+

@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^api/cft$', views.Maneuver_Fire),
-    url(r'^api/cft$', views.Movement_Contact),
-    url(r'^api/cft$', views.Ammo_Lift),
+    url('maneuver_fire/', views.Maneuver_Fire),
+    url('movement_contact/', views.Movement_Contact),
+    url('ammo_lift/', views.Ammo_Lift),
 ]

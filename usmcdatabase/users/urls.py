@@ -1,6 +1,7 @@
-from django.urls import url
+from django.urls import path
 from users import views
 
 urlpatterns = [
-    url(r'^api/users$', views.user),
+    
+    path('users/', views.user),
 ]
